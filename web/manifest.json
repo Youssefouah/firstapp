@@ -1,6 +1,6 @@
 {
-    "name": "firstapp",
-    "short_name": "firstapp",
+    "name": "devtest",
+    "short_name": "devtest",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
