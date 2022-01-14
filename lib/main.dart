@@ -1,14 +1,36 @@
+import 'package:devtest/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget{
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
-    home:Scaffold(
+    return const MaterialApp(
+    home: HomePage(),
+  );
+
+
+}}
+
+
+
+
+class TestWidget extends StatefulWidget {
+  const TestWidget({ Key? key }) : super(key: key);
+
+  @override
+  _TestWidgetState createState() => _TestWidgetState();
+}
+
+class _TestWidgetState extends State<TestWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
          appBar:AppBar(),
          drawer:Drawer(),
          body:Column(
@@ -106,9 +128,6 @@ class MyApp extends StatelessWidget{
         ]),
         )
            ]),
-  ),
-
   );
 
-
-}}
+  }}
