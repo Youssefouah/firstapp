@@ -16,161 +16,151 @@ class Mycalculte extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
-      appBar: AppBar(),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        color: Colors.black,
-        child: Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 50,bottom:10,left:5,right: 5),
-          color: Colors.black,
-          child: Column(
-            children: [
-              Screen(context),
-              Body_calculte(context)]),
-        ),
+      backgroundColor: Colors.black,    
+      body:Center(
+        child: Padding(
+        padding: const EdgeInsets.only(top: 40,bottom: 20,left: 10,right: 10),
+        child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Screen(context,"Hello",const Color.fromARGB(255, 240, 142, 135)),
+                Screen(context,"Hi",Colors.yellow),
+                Body_calculte(context),                                                                                                
+           ])
+           ),
       ),
     );
   }
 
 }
 
-Widget Screen(BuildContext context){
+// ignore: non_constant_identifier_names
+Widget Screen(BuildContext context,String? result,Color resultcolor){
    return Container(
      width:MyappConsts.width,
-     height:70,
+     height:30,
      margin: const EdgeInsets.all(10),
-     child: const TextField(
-       maxLines:2,
-       decoration: InputDecoration(
-         border:OutlineInputBorder(
-
-         borderRadius:BorderRadius.all(const Radius.circular(10))
-         ), 
-       )
-     ),
-  
-   );
-}
-
-Widget frome(BuildContext context,String? num){
-  return Container(
-    height: 40,
-    width: 40,
-    
-    decoration: BoxDecoration(
-      color:Colors.black,
-      border: Border.all(
-        width: 2,
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(30))
-    ),
-    child: Center(
-      child: Text("$num",style: const TextStyle(color: Colors.yellow),)),
+     child: Row(
+       mainAxisAlignment: MainAxisAlignment.end,
+       children: [
+         Text("$result",
+         style: TextStyle(color: resultcolor)
+         ,),]
+         )
   );
 }
 
-Widget operation(BuildContext context,String? oper,double? heigh ,Color? plusColor){
+
+
+// ignore: non_constant_identifier_names
+Widget button_actual(BuildContext context,String? btntext,int? type){
   // ignore: prefer_typing_uninitialized_variables
-  var plusColor;
-  return Container(
-    height: heigh,
-    width: 40,
+  if (type ==0){
+    return Container(
+    height: 60,
+    width: 60,
     decoration: BoxDecoration(
-      color: plusColor?? Colors.transparent,
+      color:  const Color.fromARGB(0, 66, 63, 63),
       border: Border.all(
         width: 2,
       ),
-      borderRadius: const BorderRadius.all(Radius.circular(30))
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      boxShadow: [
+        BoxShadow(
+        color: const Color.fromARGB(255, 75, 68, 68).withOpacity(0.5),
+        spreadRadius: 0,
+        blurRadius: 3,
+        offset: const Offset(3, 3), 
+          )],
     ),
     child: Center(
-      child: Text("$oper",style: const TextStyle(color: Colors.yellow ))),
+      child: FloatingActionButton(
+             backgroundColor:const Color.fromARGB(0, 66, 63, 63) ,
+             child: Text("$btntext"
+             ,style: const TextStyle(color: Colors.yellow )),
+             onPressed: () {  },)),
   );
+  }
+  else{
+    return Container(
+    height: 120,
+    width: 60,
+    decoration: BoxDecoration(
+      color:  const Color.fromARGB(255, 235, 212, 13),
+      border: Border.all(
+        width: 2,
+      ),
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      boxShadow: [
+        BoxShadow(
+        color: const Color.fromARGB(206, 210, 212, 64).withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius: 3,
+        offset: const Offset(3, 3),  
+          )],
+    ),
+    
+    child: Center(
+      child: MaterialButton(
+        height:120 ,
+        shape: const StadiumBorder(),
+        color:  Colors.yellow,
+        child: Text("$btntext",style: const TextStyle(color: Colors.black )),
+        onPressed: () {  },
+      )),
+  );
+  }
 }
 
+// ignore: non_constant_identifier_names
 Widget Body_calculte(BuildContext context){
-  return Container(
-    width:MyappConsts.width,
-    margin: const EdgeInsets.only(left: 10,right: 10),
-    child: Row(
-      children: [
-        //system numbers 
-        SizedBox(
-           child: neural_numerique(context),
-        ),
-        //system operation
-        const SizedBox(width: 5,),
-        SizedBox(
-            child:Column(
-              children: [
-                operation(context, "<=",40,null),
-                const SizedBox(height: 10),
-                operation(context, "-",40,null),
-                const SizedBox(height: 10,),
-                operation(context, "+",40,Colors.yellow),
-                const SizedBox(height: 10,),
-                operation(context, "=",90,null),
-              ]),
-        )
-      ],),
-  );
-}
-
-Widget neural_numerique(BuildContext context){
-   return Column(
+   return Row(
+     mainAxisAlignment: MainAxisAlignment.center,
      children: [
-       Row(
+       Column(
          children: [
-          operation(context, "AC",40,null),
-          const SizedBox(width: 10,),
-          operation(context, "/",40,null),
-          const SizedBox(width: 10,),
-          operation(context, "X",40,null),
-          const SizedBox(width: 10,),
+        Row(
+         children: [
+            button_actual(context, 'AC',0),
+            button_actual(context, '/',0),
+            button_actual(context, 'X',0),
          ],),
-      const SizedBox(height: 10,),   
-      Row(
-         children: [
-          frome(context, "7"),
-          const SizedBox(width: 10,),
-          frome(context, "8"),
-          const SizedBox(width: 10,),
-          frome(context, "9"),
-          const SizedBox(width: 10,),
-         ],),
-      const SizedBox(height: 10,),   
-      Row(
-         children: [
-          frome(context, "4"),
-          const SizedBox(width: 10,),
-          frome(context, "5"),
-          const SizedBox(width: 10,),
-          frome(context, "6"),
-          const SizedBox(width: 10,),
-         ],),
-      const SizedBox(height: 10,),   
-      Row(
-         children: [
-          frome(context, "1"),
-          const SizedBox(width: 10,),
-          frome(context, "2"),
-          const SizedBox(width: 10,),
-          frome(context, "3"),
-          const SizedBox(width: 10,),
-         ],),
-      const SizedBox(height: 10,),   
-      Row(
-         children: [
-          frome(context, "%"),
-          const SizedBox(width: 10,),
-          frome(context, "0"),
-          const SizedBox(width: 10,),
-          frome(context, "."),
-          const SizedBox(width: 10,),
-         ],)     
-     ],);
+        Row(
+          children: [
+            button_actual(context, '7',0),
+            button_actual(context, '8',0),
+            button_actual(context, '9',0),
+                             ]),  
+        Row(
+          children: [
+            button_actual(context, '4',0),
+            button_actual(context, '5',0),
+            button_actual(context, '6',0),
+                             ]),
+        Row(
+            children: [
+                button_actual(context, '1',0),
+                button_actual(context, '2',0),
+                button_actual(context, '3',0),
+                             ]),   
+        Row(
+            children: [
+                button_actual(context, '%',0),
+                button_actual(context, '0',0),
+                button_actual(context, '.',0),
+                             ]),
+         ],),                                                        
+       Column(
+              children: [
+                  button_actual(context, '<=',0),
+                  button_actual(context, '-',0),
+                  button_actual(context, '+',0),
+                  button_actual(context, '=',1),
+              ],
+            )   
+     ],
+   );
 }
 
 class MyappConsts{
